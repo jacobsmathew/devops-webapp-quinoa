@@ -18,3 +18,10 @@ jobs:
 
       - name: Run tests
         run: echo "Tests passed"
+      - name: Notify Slack
+        if: always()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"CI Pipeline executed for devops-webapp"}' \
+          ${{ secrets.SLACK_WEBHOOK }}
+  
